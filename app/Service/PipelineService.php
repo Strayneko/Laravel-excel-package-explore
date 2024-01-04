@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use AnourValar\Office\Format;
+use AnourValar\Office\Generated;
+use AnourValar\Office\Mixer;
 use AnourValar\Office\SheetsService;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -54,6 +56,8 @@ class PipelineService{
      */
     public function setFilePath(string $fileName, string $path = 'generated_documents'): self
     {
+        $now = now()->format('d-F-Y_H-i-s');
+        $fileName = "{$now}_{$fileName}";
         $this->filePath = "{$path}/{$fileName}";
 
         return $this;
@@ -71,6 +75,31 @@ class PipelineService{
                       ->save(Format::Xlsx);
 
         Storage::put($this->filePath, $file);
+        return $this;
+    }
+
+    /**
+     * Generate AnourValar\Office\Generated instance based on the given template and data
+     * @return \AnourValar\Office\Generated
+     */
+    public function generate(): Generated
+    {
+        return $this->sheetsService
+                    ->generate($this->templateFileName, $this->data);
+    }
+
+
+    /**
+     * Merge generated documents into single document file
+     * @param \AnourValar\Office\Generated ...$documents
+     * @return $this
+     */
+    public function merge(...$documents): self
+    {
+        $mixer = new Mixer();
+        $result = $mixer(...array_values($documents))->save(Format::Xlsx);
+
+        Storage::put($this->filePath, $result);
         return $this;
     }
 
