@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
          ]);
 
          \App\Models\Salary::factory(30)->create();
+
+         $this->call(MovieSeeder::class);
     }
 }
