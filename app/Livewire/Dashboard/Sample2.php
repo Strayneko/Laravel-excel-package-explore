@@ -34,18 +34,18 @@ class Sample2 extends Component
 
         $data = $this->getData();
         $document1 = $this->pipelineService
-            ->setTemplateFile($this->form->file->getRealPath())
-            ->setData($data)
-            ->generate();
+                          ->setTemplateFile($this->form->file->getRealPath())
+                          ->setData($data)
+                          ->generate();
 
         $document2 = $this->pipelineService
-            ->setTemplateFile($this->form->file2->getRealPath())
-            ->setData($data)
-            ->generate();
+                          ->setTemplateFile($this->form->file2->getRealPath())
+                          ->setData($data)
+                          ->generate();
 
         $mixer = $this->pipelineService
-            ->setFilePath('merged_documents.xlsx')
-            ->merge($document1, $document2);
+                      ->setFilePath('merged_documents.xlsx')
+                      ->merge($document1, $document2);
 
         return $mixer->download();
     }

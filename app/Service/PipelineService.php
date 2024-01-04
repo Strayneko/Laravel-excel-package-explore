@@ -107,7 +107,7 @@ class PipelineService{
      * Download the document
      * @return StreamedResponse
      */
-    public function download()
+    public function download(): StreamedResponse
     {
         return Storage::download($this->filePath);
     }
