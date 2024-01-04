@@ -11,7 +11,7 @@ class SalaryRecords extends Component
     use WithPagination;
     public function render()
     {
-        $salaries = Salary::query()->select('id', 'name', 'base_salary', 'bonus')->paginate(10);
+        $salaries = Salary::query()->select('id', 'name', 'base_salary', 'bonus')->paginate(perPage: 10, pageName: 'salary-page');
         return view('livewire.dashboard.salary-records', compact('salaries'));
     }
 }
