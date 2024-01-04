@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Dashboard;
+namespace App\Livewire\Dashboard\Sample1;
 
 use App\Models\Salary;
 use Livewire\Component;
@@ -12,6 +12,6 @@ class SalaryRecords extends Component
     public function render()
     {
         $salaries = Salary::query()->select('id', 'name', 'base_salary', 'bonus')->paginate(perPage: 10, pageName: 'salary-page');
-        return view('livewire.dashboard.salary-records', compact('salaries'));
+        return view('livewire.dashboard.sample1.salary-records', compact('salaries'));
     }
 }
