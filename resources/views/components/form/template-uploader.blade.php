@@ -24,11 +24,7 @@
                            type="file"
                     >
                     <div>
-                        <span class="text-red-500">
-                            @error($fileModel1)
-                            {{ $message }}
-                            @enderror
-                        </span>
+                        <x-form.error model="fileModel1" />
                     </div>
                 </div>
                 @if($isDualUpload)
@@ -42,11 +38,7 @@
                                type="file"
                         >
                         <div>
-                        <span class="text-red-500">
-                            @error($fileModel2)
-                            {{ $message }}
-                            @enderror
-                        </span>
+                        <x-form.error model="fileModel2" />
                         </div>
                     </div>
                @endif
