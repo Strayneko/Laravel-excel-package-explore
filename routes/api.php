@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/v1/movies', [\App\Http\Controllers\ApiController::class, 'index'])->middleware('cors');
+Route::post('/v1/add_movies', [\App\Http\Controllers\ApiController::class, 'store'])->middleware('cors');
