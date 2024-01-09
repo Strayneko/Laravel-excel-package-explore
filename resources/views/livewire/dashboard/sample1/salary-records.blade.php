@@ -19,7 +19,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($salaries as $salary)
+            @forelse($salaries as $salary)
                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ (($salaries->currentPage() - 1) * $salaries->perPage() + 1 ) + $loop->index}}
@@ -34,7 +34,11 @@
                         ${{ number_format($salary->bonus) }}
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center pt-2">No records found...</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
 

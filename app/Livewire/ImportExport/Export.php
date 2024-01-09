@@ -8,6 +8,7 @@ use App\Models\Salary;
 use Illuminate\Support\Facades\Schema;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Export extends Component
 {
@@ -15,26 +16,26 @@ class Export extends Component
 
     public ExportForm $form;
 
-    public int $exportProgress = 0;
-
     public int $currentRow = 1;
 
     public int $totalRow = 1;
 
-    public function mount()
+    public function mount(): void
     {
-        $this->columns = Schema::getColumnListing('salaries');
+        $this->columns              = Schema::getColumnListing('salaries');
         $this->form->selectedColumn = $this->columns;
-        $this->totalRow = Salary::query()->count();
+
+        $rowCount                   = Salary::query()->count();
+        $this->totalRow             = $rowCount === 0 ? 1 : $rowCount;
     }
 
-    public function export()
+    public function export(): BinaryFileResponse
     {
         $this->form->validate();
+
         return Excel::download(new SalaryExport($this->form->selectedColumn, function ($row) {
             $this->stream(to: 'currentRow', content: $row, replace: true);
-            $this->stream(to: 'exportProgress', content: ($row/$this->totalRow) * 100, replace: true);
-        }), 'tes.' . $this->form->exportType, ucfirst($this->form->exportType));
+        }), 'exported_document.' . $this->form->exportType, ucfirst($this->form->exportType));
     }
 
     public function render()

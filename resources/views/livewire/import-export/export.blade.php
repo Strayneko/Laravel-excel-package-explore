@@ -19,38 +19,40 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4">
-                    <div>
-                        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Export As</label>
-                        <select id="countries" wire:model="form.exportType" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="csv">CSV</option>
-                            <option value="xlsx">Excel (xlsx)</option>
-                        </select>
+                    <div wire:loading.remove wire:target="export">
+                            <div>
+                                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Export As</label>
+                                <select id="countries" wire:model="form.exportType" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="csv">CSV</option>
+                                    <option value="xlsx">Excel (xlsx)</option>
+                                </select>
 
-                        <x-form.error model="form.exportType" />
-                    </div>
-
-                    <div>
-                        <div class="text-dark-900 text-sm mb-2">Select Columns to export</div>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach($columns as $column)
-                            <div class="flex items-center mb-4">
-                                <input id="column-{{ $column }}"
-                                       wire:key="input-{{ $column }}"
-                                       type="checkbox"
-                                       value="{{ $column }}"
-                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                       wire:model="form.selectedColumn"
-                                >
-                                <label for="column-{{ $column }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $column }}</label>
+                                <x-form.error model="form.exportType" />
                             </div>
-                            @endforeach
-                        </div>
 
-                        @error('form.selectedColumn')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
+                            <div>
+                                <div class="text-dark-900 text-sm mb-2">Select Columns to export</div>
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach($columns as $column)
+                                    <div class="flex items-center mb-4">
+                                        <input id="column-{{ $column }}"
+                                               wire:key="input-{{ $column }}"
+                                               type="checkbox"
+                                               value="{{ $column }}"
+                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                               wire:model="form.selectedColumn"
+                                        >
+                                        <label for="column-{{ $column }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $column }}</label>
+                                    </div>
+                                    @endforeach
+                                </div>
+
+                                @error('form.selectedColumn')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
-                </div>
 
                 <div class="mx-4 flex justify-center mb-4">
                     <div  wire:loading wire:target="export">
