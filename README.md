@@ -13,6 +13,8 @@ $ cd Laravel-excel-pacakge-explore
 $ cp .env.example .env
 ```
 
+- Setup database environment varialbes
+
 ```dotenv
 DB_CONNECTION=mysql
 DB_HOST=host
@@ -49,7 +51,7 @@ $ php artisan db:seed
 ```bash
 $ php artisan serve
 ```
-#### 8. Start local vite server
+#### 8. Start vite development server
 - NPM
 ```bash
 $ npm run dev
