@@ -13,7 +13,7 @@ $ cd Laravel-excel-pacakge-explore
 $ cp .env.example .env
 ```
 
-- Setup database environment varialbes
+- Setup database environment variables
 
 ```dotenv
 DB_CONNECTION=mysql
