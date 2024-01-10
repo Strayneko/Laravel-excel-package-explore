@@ -11,7 +11,9 @@ export default {
         './resources/views/**/*.blade.php',
         "./node_modules/flowbite/**/*.js"
     ],
-
+    safelist: [
+        'max-w-2xl',
+    ],
     theme: {
         extend: {
             fontFamily: {
