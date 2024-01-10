@@ -56,8 +56,8 @@ class PipelineService{
      */
     public function setFilePath(string $fileName, string $path = 'generated_documents'): self
     {
-        $now = now()->format('d-F-Y_H-i-s');
-        $fileName = "{$now}_{$fileName}";
+        $now            = now()->format('d-F-Y_H-i-s');
+        $fileName       = "{$now}_{$fileName}";
         $this->filePath = "{$path}/{$fileName}";
 
         return $this;

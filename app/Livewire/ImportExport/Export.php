@@ -33,9 +33,11 @@ class Export extends Component
     {
         $this->form->validate();
 
+        $now      = now()->format('d-F-Y_H-i-s');
+        $fileName = "{$now}_exported_document.{$this->form->exportType}";
         return Excel::download(new SalaryExport($this->form->selectedColumn, function ($row) {
             $this->stream(to: 'currentRow', content: $row, replace: true);
-        }), 'exported_document.' . $this->form->exportType, ucfirst($this->form->exportType));
+        }), $fileName, ucfirst($this->form->exportType));
     }
 
     public function render()
