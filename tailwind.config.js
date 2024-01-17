@@ -13,6 +13,10 @@ export default {
     ],
     safelist: [
         'max-w-2xl',
+        'max-w-3xl',
+        'max-w-4xl',
+        'max-w-5xl',
+        'max-w-6xl',
     ],
     theme: {
         extend: {
