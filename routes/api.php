@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/v1/add_users', [\App\Http\Controllers\ApiController::class, 'store'])->middleware('cors');
 Route::delete('/v1/delete_users', [\App\Http\Controllers\ApiController::class, 'destroy'])->middleware('cors');
+Route::post('/v1/store_screening_information', [\App\Http\Controllers\Api\ScreeningInformationController::class, 'store'])->middleware('cors');
