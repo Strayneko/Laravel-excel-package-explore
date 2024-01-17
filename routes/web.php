@@ -27,4 +27,5 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/import-export', fn () => view('import-export.index'))->name('import-export');
+    Route::get('/screening', fn () => view('screening.index'))->name('screening');
 });

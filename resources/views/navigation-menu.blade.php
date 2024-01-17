@@ -18,6 +18,9 @@
                     <x-nav-link wire:navigate href="{{ route('import-export') }}" :active="request()->routeIs('import-export')">
                         {{ __('Import/Export Excel') }}
                     </x-nav-link>
+                    <x-nav-link wire:navigate href="{{ route('screening') }}" :active="request()->routeIs('screening')">
+                        {{ __('Screening') }}
+                    </x-nav-link>
                 </div>
             </div>
 
